@@ -2,6 +2,9 @@
 
 #include <stdio.h>
 
+void add_to_out(int val, int *ret) { *ret = *ret + val; }
+
+void multiply_by_ten(int *val) { *val = *val * 10; }
 
 int main(void) {
 
@@ -23,7 +26,19 @@ int main(void) {
 
     printf("list size: %lu\n", size(list));
     print(list);
+    printf("\n");
 
+    int res = 0;
+    foreach(list, add_to_out, &res);
+
+    printf("res is: %d is this correct: %s\n\n", res, res == 51 ? "yes" : "no" );
+
+    res = 0;
+    foreach_in_place(list, multiply_by_ten);
+    foreach(list, add_to_out, &res);
+    print(list);
+
+    printf("res is: %d is this correct: %s\n\n", res, res == 510 ? "yes" : "no" );
 
 
     destruct(list);

@@ -80,3 +80,21 @@ void print(struct array_list* list) {
 
     printf("]\n");
 }
+
+void foreach(struct array_list *list, FOREACH_IN_WITH_RESULT_FUNCTION function,
+              int *ret) {
+
+    for (size_t i = 0; i < size(list); ++i) {
+        int val;
+        if (element_at(list, i, &val) == 0) {
+            function(val, ret);
+        }
+    }
+}
+
+void foreach_in_place(struct array_list* list, FOREACH_IN_PLACE_FUNCTION function) {
+
+    for (size_t i = 0; i < size(list); ++i) {
+        function(list->data + i);
+    }
+}

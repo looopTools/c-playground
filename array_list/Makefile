@@ -23,6 +23,13 @@ release: static_release
 
 debug: static_debug
 	$(CC) $(CC_BASE_FLAGS) $(CC_DEBUG_FLAGS) main.c -L. -larray_list_debug -o main
+
+valgrind_debug: debug
+	valgrind --leak-check=full ./main
+
+valgrind_release: release
+	valgrind --leak-check=full ./main
+
 clean:
 	rm main
 	rm *.a
