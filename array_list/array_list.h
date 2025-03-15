@@ -11,10 +11,10 @@ struct array_list {
 };
 
 
-struct array_list *init(const size_t base_size);
-void destruct(struct array_list *list);
+struct array_list *array_list_constructor(const size_t base_size);
+void array_list_destructor(struct array_list *list);
 
-void append(struct array_list *list, int value);
+void array_list_append(struct array_list *list, int value);
 
 int element_at(struct array_list *list, const size_t index, int *ret);
 

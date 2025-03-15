@@ -8,17 +8,17 @@ void multiply_by_ten(int *val) { *val = *val * 10; }
 
 int main(void) {
 
-    struct array_list* list = init(10);
+    struct array_list* list = array_list_constructor(10);
 
     for (size_t i = 0; i < 10; ++i) {
-        append(list, (int)i);
+        array_list_append(list, (int)i);
     }
 
     printf("list size: %lu\n", size(list));
     print(list);
 
     printf("\n");
-    append(list, 10);
+    array_list_append(list, 10);
     printf("list size: %lu\n", size(list));
     print(list);
 
@@ -41,6 +41,6 @@ int main(void) {
     printf("res is: %d is this correct: %s\n\n", res, res == 510 ? "yes" : "no" );
 
 
-    destruct(list);
+    array_list_destructor(list);
     return 0;
 }

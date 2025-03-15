@@ -2,24 +2,41 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-struct array_list *init(const size_t base_size) {
+struct array_list *array_list_constructor(const size_t base_size) {
 
     struct array_list* list = (struct array_list*)malloc(sizeof(struct array_list));
+
+    if (!list) {
+        perror("Failed to allocate memory for Array List");
+        //return EXIT_FAILURE;
+    }
+
     list->base_size = base_size;
     list->size = 0;
     list->data = (int*)malloc(sizeof(int) * base_size);
+
+    if (!list) {
+        perror("Failed to allocate memory for Data Pointer");
+        //return EXIT_FAILURE;
+    }
+
     return list;
 }
 
-void destruct(struct array_list* list) {
-    free(list->data);
-    free(list);
+void array_list_destructor(struct array_list* list) {
+    if (list) {
+        list->base_size = 0;
+        list->size = 0;
+        free(list->data);
+        free(list);
+    }
 }
 
-void append(struct array_list *list, int value) {
+void array_list_append(struct array_list *list, int value) {
 
-    if (list->size != 0 && list->size % list->base_size) {
+    if (list->size != 0 && list->size % list->base_size == 0) {
         int* tmp = (int *)malloc(sizeof(int) * (list->size + list->base_size));
         memcpy(tmp, list->data, sizeof(int) * list->size);
         free(list->data);
